@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.util.Random;
 
@@ -12,8 +13,10 @@ public class Main
         int count= 0;
 
         for (int i = 0; i<myArray.length; i++ ) {
-            again_hahaha(myArray[i],count);
+            give_values(myArray[i], count);
+            System.out.print(myArray[i]+" ");
         }
+        System.out.println(count);
         int trues=0;
          while (trues ==3){
              for (int i= 5; i>0 ; i--){
@@ -25,14 +28,16 @@ public class Main
                  }
                  if(trues==3){
                      System.out.println("Correctly entered spots: "+ trues);
-                     
+                     System.out.println("Congratulations, You found all boxes!");
+                     break;
                  }
              }
+             System.out.println("Boxes changed their locations (((");
+             for (int i = 0; i<myArray.length; i++ ) {
+                 give_values(myArray[i],count);
+             }
+
          }
-
-
-
-
     }
     public static  int random(int a){
         Random random = new Random();
@@ -46,21 +51,22 @@ public class Main
         }
         return howmanyright;
     }
-     public static int again_hahaha(int a, int b ){
+     public static int give_values(int a, int x){
         Random random = new Random();
-        a= random.nextInt(2);
-        if(a==1){
-            if(b<3){
-                a=1;
-                b++;
+        int[] local = new int [7];
+        x=0;
+        for (int i = 0; i< local.length;i++) {
+            local[i] = random.nextInt(2);
+            a = local[i];
+            if (a == 1) {
+                if (x < 3 && a==1) {
+                    a = 1;
+                    x++;
+                } else if (x== 3 && a==1) {
+                    a = 0;
+                }
             }
-            else if (b!=3 && b>3){
-                a=0;
-            }
+            return a;
         }
-        return a;
-
      }
-
-
 }
