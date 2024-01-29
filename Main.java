@@ -3,14 +3,8 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        Random random = new Random();
         Scanner scanner= new Scanner(System.in);
         int[] myArray = new int [7];
-        int[] km_inputs= new int[3];
-        System.out.println("Enter 3 spots , where cargo could be:");
-        for (int i =0; i<km_inputs.length; i++){
-            km_inputs[i]=scanner.nextInt()-1;
-        }
         int count= 0;
         for (int i = 0; i<myArray.length; i++ ){
             if(count<3) {
@@ -19,40 +13,48 @@ public class Main {
                     count++;
                 }
             }
-            if(i>=5 && count!=3 ){
+            if(i>=5 && count<3 ){
                 myArray[i]=1;
             }
-            System.out.print(myArray[i]+" ");
-            if(count>3){
+            if(count>3 && i >5){
                 myArray[i]=0;
             }
+            System.out.print(myArray[i]+" ");
         }
-        int right =0;
-        while(right==3){
-                for(int i =0; i<km_inputs.length; i++){
-                    int x = km_inputs[i];
-                    checking(myArray[x],right);
 
+        int correct = 0;
+        while (correct <3){
+            for (int attempt=0; attempt<5; attempt++){
+                System.out.println("Enter 3 kilometers , where cargo could be buried :");
+                int km1 = scanner.nextInt()-1;
+                int km2 = scanner.nextInt()-1;
+                int km3 = scanner.nextInt()-1;
+                if(myArray[km1]==1){
+                    correct++;
                 }
-                System.out.println("Amount of correctly entered kilometers:  "+ right);
-
-                if(right==3){
-                    System.out.println("Congratulations ! You found all boxes!");
-                    System.exit(0);
+                if(myArray[km2]==1){
+                    correct++;
                 }
-
+                if(myArray[km3]==1){
+                    correct++;
+                }
+                System.out.println("Amount of correctly entered kilometers: "+correct);
+                if(correct==3){
+                    System.out.println("You found all boxes!");
+                    break;
+                }
+                else{
+                    System.out.println("Try again , Attempts left:" +(5-attempt));
+                }
+                correct=0;
+            }
         }
+
     }
     public static  int random(int a){
         Random random = new Random();
         a = random.nextInt(2);
         return a;
 
-    }
-    public static int checking (int a, int b){
-        if(a==1){
-            b++;
-        }
-        return b;
     }
 }
