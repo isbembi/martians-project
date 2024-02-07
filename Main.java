@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.util.Random;
-
 public class Main {
     public static void main(String[] args) {
         Scanner scanner= new Scanner(System.in);
@@ -9,19 +8,16 @@ public class Main {
         for (int i = 0; i<myArray.length; i++ ){
             if(count<3) {
                 myArray[i] = random(myArray[i]);
-                if(myArray[i]==1){
-                    count++;
-                }
+                if(myArray[i]==1) {
+                    count++;}
+
             }
-            if(i>=5 && count<3 ){
-                myArray[i]=1;
-            }
-            if(count>3 && i >5){
+            if (count>3){
                 myArray[i]=0;
+                count --;
             }
         }
         count = 0;
-
         int correct = 0;
         while (correct <3) {
             for (int attempt = 0; attempt < 5; attempt++) {
@@ -42,13 +38,15 @@ public class Main {
                 if (correct == 3) {
                     System.out.println("You found all boxes!");
                     break;
-                } else {
+                }
+                else {
                     System.out.println("Try again , Attempts left:" + (5 - (attempt+1)));
                 }
                 correct = 0;
             }
             if (correct < 3) {
-                System.out.println("Boxes changed their locations! ");
+                System.out.println();
+                System.out.println("BOXES CHANGED THEIR LOCATIONS! ");
                 for (int i = 0; i < myArray.length; i++) {
                     if (count < 3) {
                         myArray[i] = random(myArray[i]);
@@ -56,12 +54,11 @@ public class Main {
                             count++;
                         }
                     }
-                    if (i >= 5 && count < 3) {
-                        myArray[i] = 1;
+                    if (count>3){
+                        myArray[i]=0;
+                        count--;
                     }
-                    if (count > 3 && i > 5) {
-                        myArray[i] = 0;
-                    }
+                    System.out.print(myArray[i]+" ");
                 }
                 count = 0;
             }
