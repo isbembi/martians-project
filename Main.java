@@ -2,22 +2,25 @@ import java.util.Scanner;
 import java.util.Random;
 public class Main {
     public static void main(String[] args) {
+        Random random = new Random();
         Scanner scanner= new Scanner(System.in);
         int[] myArray = new int [7];
-        int count=0;
+        int count =0;
         for (int i = 0; i<myArray.length; i++ ){
             if(count<3) {
-                myArray[i] = random(myArray[i]);
-                if(myArray[i]==1) {
-                    count++;}
-
+                myArray[i] = random.nextInt(2);
+                if(myArray[i]==1){
+                    count++;
+                }
             }
-            if (count>3){
+            if(i>5 && count<3 ){
+                myArray[i]=1;
+            }
+            System.out.print(myArray[i]+" ");
+            if(count>3){
                 myArray[i]=0;
-                count --;
             }
         }
-        count = 0;
         int correct = 0;
         while (correct <3) {
             for (int attempt = 0; attempt < 5; attempt++) {
@@ -38,35 +41,31 @@ public class Main {
                 if (correct == 3) {
                     System.out.println("You found all boxes!");
                     break;
+                } else {
+                    System.out.println("Try again , Attempts left:" + (5 - (attempt + 1)));
                 }
-                else {
-                    System.out.println("Try again , Attempts left:" + (5 - (attempt+1)));
-                }
-                correct = 0;
+                correct=0;
             }
-            if (correct < 3) {
-                System.out.println();
-                System.out.println("BOXES CHANGED THEIR LOCATIONS! ");
-                for (int i = 0; i < myArray.length; i++) {
-                    if (count < 3) {
-                        myArray[i] = random(myArray[i]);
-                        if (myArray[i] == 1) {
+            if(correct<3) {
+                System.out.println("Boxes have hanged their locations !");
+                correct = 0;
+                count= 0;
+                for (int i = 0; i<myArray.length; i++ ){
+                    if(count<3) {
+                        myArray[i] = random.nextInt(2);
+                        if(myArray[i]==1){
                             count++;
                         }
                     }
-                    if (count>3){
-                        myArray[i]=0;
-                        count--;
+                    if(i>5 && count<3 ){
+                        myArray[i]=1;
                     }
                     System.out.print(myArray[i]+" ");
+                    if(count>3){
+                        myArray[i]=0;
+                    }
                 }
-                count = 0;
             }
         }
-    }
-    public static  int random(int a){
-        Random random = new Random();
-        a = random.nextInt(2);
-        return a;
     }
 }
