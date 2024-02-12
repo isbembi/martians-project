@@ -1,25 +1,10 @@
-import java.util.Scanner;
-import java.util.Random;
-import java.util.List;
-import java.util.Collections;
+import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
         Random random = new Random();
         Scanner scanner= new Scanner(System.in);
-        int[] myArray = new int [7];
-        int count =0;
-        for (int i = 0; i<myArray.length; i++ ){
-            if(count<3) {
-                myArray[i] = random.nextInt(2);
-                if(myArray[i]==1){
-                    count++;
-                }
-            }
-            if(count>3){
-                myArray[i]=0;
-            }
-            System.out.print(myArray[i]+" ");
-        }
+        shuffleArray();
         int correct = 0;
         while (correct <3) {
             for (int attempt = 0; attempt < 5; attempt++) {
@@ -47,20 +32,15 @@ public class Main {
             }
             if(correct<3) {
                 System.out.println("Boxes have changed their locations !");
-                count= 0;
-                for (int i = 0; i<myArray.length; i++ ){
-                    if(count<3) {
-                        myArray[i] = random.nextInt(2);
-                        if(myArray[i]==1){
-                            count++;
-                        }
-                    }
-                    if(count>3){
-                        myArray[i]=0;
-                    }
-                    System.out.print(myArray[i]+" ");
-                }
+                shuffleArray();
             }
         }
+    }
+    private static Integer[] myArray ={1,1,1,0,0,0,0};
+
+    private static void shuffleArray(){
+        List<Integer> myList=Arrays.asList(myArray);
+        Collections.shuffle(myList.subList(0,7), new Random());
+        //for checking add printout)
     }
 }
