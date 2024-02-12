@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.Random;
+import java.util.List;
+import java.util.Collections;
 public class Main {
     public static void main(String[] args) {
         Random random = new Random();
@@ -13,13 +15,10 @@ public class Main {
                     count++;
                 }
             }
-            if(i>5 && count<3 ){
-                myArray[i]=1;
-            }
-            System.out.print(myArray[i]+" ");
             if(count>3){
                 myArray[i]=0;
             }
+            System.out.print(myArray[i]+" ");
         }
         int correct = 0;
         while (correct <3) {
@@ -47,8 +46,7 @@ public class Main {
                 correct=0;
             }
             if(correct<3) {
-                System.out.println("Boxes have hanged their locations !");
-                correct = 0;
+                System.out.println("Boxes have changed their locations !");
                 count= 0;
                 for (int i = 0; i<myArray.length; i++ ){
                     if(count<3) {
@@ -57,13 +55,10 @@ public class Main {
                             count++;
                         }
                     }
-                    if(i>5 && count<3 ){
-                        myArray[i]=1;
-                    }
-                    System.out.print(myArray[i]+" ");
                     if(count>3){
                         myArray[i]=0;
                     }
+                    System.out.print(myArray[i]+" ");
                 }
             }
         }
